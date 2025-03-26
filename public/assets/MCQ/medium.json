@@ -1,0 +1,226 @@
+[
+  {
+    "id": 1,
+    "question": "What is the value of x in the equation 2x + 3 = 11?",
+    "options": ["2", "3", "4", "5"],
+    "correct_answer": "4",
+    "difficulty": "medium",
+    "tags": ["algebra"],
+    "explanation": "To find x, subtract 3 from both sides to get 2x = 8, then divide by 2 to get x = 4.",
+    "references": ["https://www.mathsisfun.com/algebra/linear-equations.html"]
+  },
+  {
+    "id": 2,
+    "question": "If the area of a circle is 16π square units, what is the radius of the circle?",
+    "options": ["2 units", "3 units", "4 units", "5 units"],
+    "correct_answer": "4 units",
+    "difficulty": "medium",
+    "tags": ["geometry"],
+    "explanation": "The area of a circle is πr^2. So, 16π = πr^2, which gives r^2 = 16. Taking the square root, r = 4 units.",
+    "references": ["https://www.mathsisfun.com/geometry/circle-area.html"]
+  },
+  {
+    "id": 3,
+    "question": "What is the hypotenuse of a right triangle with legs of 3 units and 4 units?",
+    "options": ["5 units", "6 units", "7 units", "8 units"],
+    "correct_answer": "5 units",
+    "difficulty": "medium",
+    "tags": ["geometry"],
+    "explanation": "Using the Pythagorean theorem: a^2 + b^2 = c^2, where a = 3 and b = 4, we get c = √(3^2 + 4^2) = √(9 + 16) = √25 = 5 units.",
+    "references": ["https://www.mathsisfun.com/pythagoras.html"]
+  },
+  {
+    "id": 4,
+    "question": "What is the sum of the interior angles of a hexagon?",
+    "options": ["360 degrees", "540 degrees", "720 degrees", "900 degrees"],
+    "correct_answer": "720 degrees",
+    "difficulty": "medium",
+    "tags": ["geometry"],
+    "explanation": "The sum of the interior angles of a polygon is (n-2)×180 degrees, where n is the number of sides. For a hexagon, n = 6, so the sum is (6-2)×180 = 720 degrees.",
+    "references": [
+      "https://www.mathsisfun.com/geometry/interior-angles-polygons.html"
+    ]
+  },
+  {
+    "id": 5,
+    "question": "Solve for x: 3(x - 2) = 9",
+    "options": ["2", "3", "4", "5"],
+    "correct_answer": "5",
+    "difficulty": "medium",
+    "tags": ["algebra"],
+    "explanation": "First, divide both sides by 3 to get x - 2 = 3. Then, add 2 to both sides to get x = 5.",
+    "references": ["https://www.mathsisfun.com/algebra/linear-equations.html"]
+  },
+  {
+    "id": 6,
+    "question": "What is the quadratic formula?",
+    "options": [
+      "x = (-b ± √(b²-4ac)) / 2a",
+      "x = (-b ± √(b²+4ac)) / 2a",
+      "x = (-b ± 4ac) / 2a",
+      "x = (b ± √(b²-4ac)) / 2a"
+    ],
+    "correct_answer": "x = (-b ± √(b²-4ac)) / 2a",
+    "difficulty": "medium",
+    "tags": ["algebra"],
+    "explanation": "The quadratic formula is used to solve quadratic equations of the form ax^2 + bx + c = 0. The correct formula is x = (-b ± √(b²-4ac)) / 2a.",
+    "references": ["https://www.mathsisfun.com/algebra/quadratic-equation.html"]
+  },
+  {
+    "id": 7,
+    "question": "If f(x) = 2x + 1, what is f(3)?",
+    "options": ["5", "6", "7", "8"],
+    "correct_answer": "7",
+    "difficulty": "medium",
+    "tags": ["algebra"],
+    "explanation": "To find f(3), substitute 3 for x in the function: f(3) = 2(3) + 1 = 6 + 1 = 7.",
+    "references": ["https://www.mathsisfun.com/algebra/function.html"]
+  },
+  {
+    "id": 8,
+    "question": "What is the derivative of x^2?",
+    "options": ["1", "x", "2x", "x^2"],
+    "correct_answer": "2x",
+    "difficulty": "medium",
+    "tags": ["calculus"],
+    "explanation": "Using the power rule for differentiation, the derivative of x^2 is 2x.",
+    "references": [
+      "https://www.mathsisfun.com/calculus/derivatives-introduction.html"
+    ]
+  },
+  {
+    "id": 9,
+    "question": "What is the slope of the line y = 2x + 3?",
+    "options": ["2", "3", "1/2", "3/2"],
+    "correct_answer": "2",
+    "difficulty": "medium",
+    "tags": ["algebra"],
+    "explanation": "In the equation y = mx + b, m represents the slope. Here, the slope is 2.",
+    "references": ["https://www.mathsisfun.com/algebra/linear-equations.html"]
+  },
+  {
+    "id": 10,
+    "question": "What is the factorial of 5?",
+    "options": ["120", "60", "20", "5"],
+    "correct_answer": "120",
+    "difficulty": "medium",
+    "tags": ["number theory"],
+    "explanation": "The factorial of a number n is the product of all positive integers less than or equal to n. So, 5! = 5×4×3×2×1 = 120.",
+    "references": ["https://www.mathsisfun.com/numbers/factorial.html"]
+  },
+  {
+    "id": 11,
+    "question": "What is the greatest common divisor (GCD) of 24 and 36?",
+    "options": ["4", "6", "8", "12"],
+    "correct_answer": "12",
+    "difficulty": "medium",
+    "tags": ["number theory"],
+    "explanation": "The GCD of two numbers is the largest number that divides both of them without leaving a remainder. The GCD of 24 and 36 is 12.",
+    "references": ["https://www.mathsisfun.com/greatest-common-factor.html"]
+  },
+  {
+    "id": 12,
+    "question": "What is the value of sin(30 degrees)?",
+    "options": ["0.5", "√2/2", "√3/2", "1"],
+    "correct_answer": "0.5",
+    "difficulty": "medium",
+    "tags": ["trigonometry"],
+    "explanation": "The sine of 30 degrees is 0.5.",
+    "references": ["https://www.mathsisfun.com/sine-cosine-tangent.html"]
+  },
+  {
+    "id": 13,
+    "question": "What is the simplified form of (x^2 - 9)/(x + 3)?",
+    "options": ["x + 3", "x - 3", "x", "x + 1"],
+    "correct_answer": "x - 3",
+    "difficulty": "medium",
+    "tags": ["algebra"],
+    "explanation": "The expression (x^2 - 9)/(x + 3) can be simplified by factoring the numerator as (x + 3)(x - 3) and then canceling out the common factor (x + 3), leaving x - 3.",
+    "references": ["https://www.mathsisfun.com/algebra/polynomials.html"]
+  },
+  {
+    "id": 14,
+    "question": "What is the volume of a cube with side length 3 units?",
+    "options": [
+      "9 cubic units",
+      "18 cubic units",
+      "27 cubic units",
+      "36 cubic units"
+    ],
+    "correct_answer": "27 cubic units",
+    "difficulty": "medium",
+    "tags": ["geometry"],
+    "explanation": "The volume of a cube is found by raising the side length to the power of 3. For a side length of 3 units, the volume is 3^3 = 27 cubic units.",
+    "references": ["https://www.mathsisfun.com/geometry/cube.html"]
+  },
+  {
+    "id": 15,
+    "question": "What is the equation of the line that passes through (0, 0) and (2, 4)?",
+    "options": ["y = 2x", "y = x + 2", "y = x/2", "y = 4x"],
+    "correct_answer": "y = 2x",
+    "difficulty": "medium",
+    "tags": ["algebra"],
+    "explanation": "The slope of the line is the change in y divided by the change in x, which is (4 - 0) / (2 - 0) = 2. Thus, the equation of the line is y = 2x.",
+    "references": ["https://www.mathsisfun.com/equation-of-line.html"]
+  },
+  {
+    "id": 16,
+    "question": "What is the least common multiple (LCM) of 6 and 8?",
+    "options": ["12", "18", "24", "30"],
+    "correct_answer": "24",
+    "difficulty": "medium",
+    "tags": ["number theory"],
+    "explanation": "The LCM of two numbers is the smallest positive integer that is divisible by both numbers. The multiples of 6 are 6, 12, 18, 24, and so on. The multiples of 8 are 8, 16, 24, and so on. The smallest common multiple is 24.",
+    "references": ["https://www.mathsisfun.com/least-common-multiple.html"]
+  },
+  {
+    "id": 17,
+    "question": "What is the simplified form of 16^(1/2)?",
+    "options": ["2", "4", "8", "16"],
+    "correct_answer": "4",
+    "difficulty": "medium",
+    "tags": ["arithmetic"],
+    "explanation": "The exponent 1/2 denotes the square root. The square root of 16 is 4 because 4 * 4 = 16.",
+    "references": ["https://www.mathsisfun.com/square-root.html"]
+  },
+  {
+    "id": 18,
+    "question": "What is the value of cos(0 degrees)?",
+    "options": ["0", "0.5", "1", "√2/2"],
+    "correct_answer": "1",
+    "difficulty": "medium",
+    "tags": ["trigonometry"],
+    "explanation": "The cosine of 0 degrees is 1, which can be verified using the unit circle or trigonometric tables.",
+    "references": ["https://www.mathsisfun.com/geometry/unit-circle.html"]
+  },
+  {
+    "id": 19,
+    "question": "What is the product of the roots of the equation x^2 - 5x + 6 = 0?",
+    "options": ["1", "5", "6", "8"],
+    "correct_answer": "6",
+    "difficulty": "medium",
+    "tags": ["algebra"],
+    "explanation": "For a quadratic equation ax^2 + bx + c = 0, the product of the roots is c/a. In this case, the equation is x^2 - 5x + 6 = 0, so the product of the roots is 6/1 = 6.",
+    "references": ["https://www.mathsisfun.com/algebra/quadratic-equation.html"]
+  },
+  {
+    "id": 20,
+    "question": "What is the value of the determinant of the matrix [[1, 2], [3, 4]]?",
+    "options": ["-2", "0", "1", "2"],
+    "correct_answer": "-2",
+    "difficulty": "medium",
+    "tags": ["algebra"],
+    "explanation": "The determinant of a 2x2 matrix [[a, b], [c, d]] is calculated as ad - bc. For the matrix [[1, 2], [3, 4]], the determinant is (1*4) - (2*3) = 4 - 6 = -2.",
+    "references": ["https://www.mathsisfun.com/algebra/matrix-determinant.html"]
+  },
+  {
+    "id": 21,
+    "question": "What is the value of tan(45 degrees)?",
+    "options": ["1", "√2", "√3", "2"],
+    "correct_answer": "1",
+    "difficulty": "medium",
+    "tags": ["trigonometry"],
+    "explanation": "The tangent of 45 degrees is 1.",
+    "references": ["https://www.mathsisfun.com/sine-cosine-tangent.html"]
+  }
+]

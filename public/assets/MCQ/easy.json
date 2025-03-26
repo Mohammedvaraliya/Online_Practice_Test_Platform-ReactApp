@@ -1,0 +1,212 @@
+[
+  {
+      "id": 1,
+      "question": "-67 x (-1) = ?",
+      "options": ["-1", "-67", "67", "1"],
+      "correct_answer": "67",
+      "difficulty": "easy",
+      "tags": ["arithmetic"],
+      "explanation": "Multiplying any number by -1 changes its sign. Here, -67 multiplied by -1 results in 67.",
+      "references": ["https://www.mathsisfun.com/numbers/multiplication.html"]
+  },
+  {
+      "id": 2,
+      "question": "What is the value of 7 + 8?",
+      "options": ["14", "15", "16", "17"],
+      "correct_answer": "15",
+      "difficulty": "easy",
+      "tags": ["arithmetic"],
+      "explanation": "Adding 7 and 8 together gives 15.",
+      "references": ["https://www.mathsisfun.com/numbers/addition.html"]
+  },
+  {
+      "id": 3,
+      "question": "What is the perimeter of a square with side length 5 units?",
+      "options": ["20 units", "15 units", "25 units", "10 units"],
+      "correct_answer": "20 units",
+      "difficulty": "easy",
+      "tags": ["geometry"],
+      "explanation": "The perimeter of a square is 4 times the length of one side. Here, 4 * 5 = 20 units.",
+      "references": ["https://www.mathsisfun.com/geometry/square.html"]
+  },
+  {
+      "id": 4,
+      "question": "What is the value of 3^2?",
+      "options": ["6", "9", "12", "8"],
+      "correct_answer": "9",
+      "difficulty": "easy",
+      "tags": ["arithmetic"],
+      "explanation": "3^2 means 3 multiplied by itself, which is 9.",
+      "references": ["https://www.mathsisfun.com/exponent.html"]
+  },
+  {
+      "id": 5,
+      "question": "Solve: 2x = 8. What is x?",
+      "options": ["2", "3", "4", "5"],
+      "correct_answer": "4",
+      "difficulty": "easy",
+      "tags": ["algebra"],
+      "explanation": "To solve 2x = 8, divide both sides by 2 to get x = 4.",
+      "references": ["https://www.mathsisfun.com/algebra/linear-equations.html"]
+  },
+  {
+      "id": 6,
+      "question": "What is the next prime number after 7?",
+      "options": ["9", "10", "11", "12"],
+      "correct_answer": "11",
+      "difficulty": "easy",
+      "tags": ["number theory"],
+      "explanation": "The prime numbers following 7 are 11, 13, 17, etc. The next one is 11.",
+      "references": ["https://www.mathsisfun.com/prime_numbers.html"]
+  },
+  {
+      "id": 7,
+      "question": "What is the value of 45 / 5?",
+      "options": ["5", "7", "9", "11"],
+      "correct_answer": "9",
+      "difficulty": "easy",
+      "tags": ["arithmetic"],
+      "explanation": "Dividing 45 by 5 results in 9.",
+      "references": ["https://www.mathsisfun.com/numbers/division.html"]
+  },
+  {
+      "id": 8,
+      "question": "What is the value of 0 x 25?",
+      "options": ["0", "25", "1", "None of the above"],
+      "correct_answer": "0",
+      "difficulty": "easy",
+      "tags": ["arithmetic"],
+      "explanation": "Any number multiplied by 0 results in 0.",
+      "references": ["https://www.mathsisfun.com/numbers/multiplication.html"]
+  },
+  {
+      "id": 9,
+      "question": "Which of these numbers is odd?",
+      "options": ["2", "4", "7", "8"],
+      "correct_answer": "7",
+      "difficulty": "easy",
+      "tags": ["number theory"],
+      "explanation": "Odd numbers are not divisible by 2. Among the options, only 7 is odd.",
+      "references": ["https://www.mathsisfun.com/odd-even-numbers.html"]
+  },
+  {
+      "id": 10,
+      "question": "What is the sum of the angles in a triangle?",
+      "options": ["90 degrees", "120 degrees", "180 degrees", "360 degrees"],
+      "correct_answer": "180 degrees",
+      "difficulty": "easy",
+      "tags": ["geometry"],
+      "explanation": "The sum of the interior angles of any triangle is always 180 degrees.",
+      "references": ["https://www.mathsisfun.com/geometry/triangles.html"]
+  },
+  {
+      "id": 11,
+      "question": "What is the smallest two-digit number?",
+      "options": ["9", "10", "11", "12"],
+      "correct_answer": "10",
+      "difficulty": "easy",
+      "tags": ["number theory"],
+      "explanation": "The smallest two-digit number is 10.",
+      "references": ["https://www.mathsisfun.com/numbers.html"]
+  },
+  {
+      "id": 12,
+      "question": "Which is greater: 3/4 or 2/3?",
+      "options": ["3/4", "2/3", "They are equal", "Cannot be determined"],
+      "correct_answer": "3/4",
+      "difficulty": "easy",
+      "tags": ["arithmetic"],
+      "explanation": "3/4 is greater than 2/3 when compared as fractions.",
+      "references": ["https://www.mathsisfun.com/fractions.html"]
+  },
+  {
+      "id": 13,
+      "question": "What is the result of 10 - 3?",
+      "options": ["5", "6", "7", "8"],
+      "correct_answer": "7",
+      "difficulty": "easy",
+      "tags": ["arithmetic"],
+      "explanation": "Subtracting 3 from 10 results in 7.",
+      "references": ["https://www.mathsisfun.com/numbers/subtraction.html"]
+  },
+  {
+      "id": 14,
+      "question": "What is the area of a rectangle with length 4 units and width 3 units?",
+      "options": ["7 square units", "12 square units", "14 square units", "10 square units"],
+      "correct_answer": "12 square units",
+      "difficulty": "easy",
+      "tags": ["geometry"],
+      "explanation": "The area of a rectangle is length times width. Here, 4 * 3 = 12 square units.",
+      "references": ["https://www.mathsisfun.com/geometry/rectangle.html"]
+  },
+  {
+      "id": 15,
+      "question": "What is 100 divided by 10?",
+      "options": ["5", "10", "15", "20"],
+      "correct_answer": "10",
+      "difficulty": "easy",
+      "tags": ["arithmetic"],
+      "explanation": "Dividing 100 by 10 results in 10.",
+      "references": ["https://www.mathsisfun.com/numbers/division.html"]
+  },
+  {
+      "id": 16,
+      "question": "What is the value of 2^3?",
+      "options": ["4", "6", "8", "10"],
+      "correct_answer": "8",
+      "difficulty": "easy",
+      "tags": ["arithmetic"],
+      "explanation": "2^3 means 2 multiplied by itself twice, which is 8.",
+      "references": ["https://www.mathsisfun.com/exponent.html"]
+  },
+  {
+      "id": 17,
+      "question": "Which of these is a factor of 36?",
+      "options": ["5", "6", "7", "8"],
+      "correct_answer": "6",
+      "difficulty": "easy",
+      "tags": ["number theory"],
+      "explanation": "Factors of 36 include 1, 2, 3, 4, 6, 9, 12, 18, and 36. Among the options, only 6 is a factor.",
+      "references": ["https://www.mathsisfun.com/definitions/factor.html"]
+  },
+  {
+      "id": 18,
+      "question": "What is the sum of 6 and 9?",
+      "options": ["13", "14", "15", "16"],
+      "correct_answer": "15",
+      "difficulty": "easy",
+      "tags": ["arithmetic"],
+      "explanation": "Adding 6 and 9 together gives 15.",
+      "references": ["https://www.mathsisfun.com/numbers/addition.html"]
+  },
+  {
+      "id": 19,
+      "question": "What is the value of pi (π) rounded to two decimal places?",
+      "options": ["3.12", "3.14", "3.16", "3.18"],
+      "correct_answer": "3.14",
+      "difficulty": "easy",
+      "tags": ["geometry"],
+      "explanation": "Pi (π) rounded to two decimal places is 3.14.",
+      "references": ["https://www.mathsisfun.com/numbers/pi.html"]
+  },
+  {
+      "id": 20,
+      "question": "What is the smallest prime number?",
+      "options": ["1", "2", "3", "5"],
+      "correct_answer": "2",
+      "difficulty": "easy",
+      "tags": ["number theory"],
+      "explanation": "The smallest prime number is 2, as it has no divisors other than 1 and itself.",
+      "references": ["https://www.mathsisfun.com/prime_numbers.html"]
+  },
+  {
+      "id": 21,
+      "question": "What is the result of 12 divided by 3?",
+      "options": ["3", "4", "6", "8"],
+      "correct_answer": "4",
+      "difficulty": "easy",
+      "tags": ["arithmetic"],
+      "explanation": "Dividing 12 by 3 results in 4.",
+      "references": ["https://www.mathsisfun.com/numbers/division.html"]
+  }
+]
