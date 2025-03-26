@@ -2,14 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth0 } from "@auth0/auth0-react";
 import axios from "axios";
-
-interface QuizHistoryItem {
-  _id: string;
-  score: number;
-  correctAnswers: number;
-  totalQuestions: number;
-  date: string;
-}
+import { QuizHistoryItem } from "../../types";
 
 const QuizHistory: React.FC = () => {
   const { user, isAuthenticated } = useAuth0();

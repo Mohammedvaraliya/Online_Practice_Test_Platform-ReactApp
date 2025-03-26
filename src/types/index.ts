@@ -10,6 +10,17 @@ export type Question = {
   userScore?: number | null;
 }
 
+export interface QuizHistoryQuestion {
+  question: string;
+  userAnswer: string | null;
+  correct_answer: string;
+  explanation: string;
+  references: string[];
+  difficulty: string;
+  tags: string[];
+  userScore: number;
+}
+
 export type QuizCompletedProps = {
   questions: Question[];
   score: number;
@@ -31,6 +42,12 @@ export interface QuizHistoryItem {
   score: number;
   correctAnswers: number;
   totalQuestions: number;
-  difficultyBreakdown: { easy: number; medium: number; hard: number };
   date: string;
+}
+
+export interface QuizHistoryDetail {
+  score: number;
+  correctAnswers: number;
+  totalQuestions: number;
+  questions: QuizHistoryQuestion[];
 }

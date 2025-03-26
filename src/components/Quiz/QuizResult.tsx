@@ -2,24 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
 import ResultEvaluationWithPiChart from "./ResultEvaluationWithPiChart";
-
-interface Question {
-  question: string;
-  userAnswer: string | null;
-  correct_answer: string;
-  explanation: string;
-  references: string[];
-  difficulty: string;
-  tags: string[];
-  userScore: number;
-}
-
-interface QuizHistoryDetail {
-  score: number;
-  correctAnswers: number;
-  totalQuestions: number;
-  questions: Question[];
-}
+import { QuizHistoryDetail } from "../../types";
 
 const QuizResult: React.FC = () => {
   const { id } = useParams();
