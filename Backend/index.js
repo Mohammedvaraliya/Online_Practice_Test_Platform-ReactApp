@@ -26,7 +26,7 @@ app.use("/api/users", userRoutes);
 app.use("/api/quiz", quizHistoryRoutes);
 
 const PORT = process.env.PORT || 5000;
-const SERVER_URL = `https://online-practice-test-platform-reactapp.onrender.com`;
+const SERVER_URL = process.env.SERVER_URL;
 
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
