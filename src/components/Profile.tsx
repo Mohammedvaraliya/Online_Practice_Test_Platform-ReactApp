@@ -17,27 +17,27 @@ const Profile = () => {
 
   if (isLoading) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-dark-1 text-white">
-        Loading...
+      <div className="min-h-screen flex items-center justify-center bg-black text-white">
+        <div className="animate-pulse text-lg">Loading profile...</div>
       </div>
     );
   }
 
   return (
     isAuthenticated && (
-      <div className="min-h-screen flex flex-col bg-dark-1">
+      <div className="min-h-screen flex flex-col bg-black">
         <Header />
-        <div className="flex-grow flex items-center justify-center bg-dark-1 p-4">
-          <div className="bg-dark-2 p-6 md:p-10 rounded-lg shadow-lg flex flex-col items-center w-full max-w-md">
+        <div className="flex-grow flex items-center justify-center p-4">
+          <div className="bg-gray-900 bg-opacity-80 backdrop-blur-md p-6 md:p-10 rounded-lg shadow-lg flex flex-col items-center w-full max-w-md border border-gray-800 transition transform duration-300 hover:scale-105 hover:shadow-xl">
             <img
               src={user?.picture}
               alt={user?.name}
-              className="w-24 h-24 md:w-32 md:h-32 rounded-full mb-4 shadow-md"
+              className="w-24 h-24 md:w-32 md:h-32 rounded-full mb-4 shadow-md border border-gray-700"
             />
             <h2 className="text-xl md:text-2xl font-semibold text-white text-center">
               {user?.name}
             </h2>
-            <p className="text-light-4 text-lg md:text-xl text-center">
+            <p className="text-gray-400 text-lg md:text-xl text-center">
               {user?.email}
             </p>
           </div>

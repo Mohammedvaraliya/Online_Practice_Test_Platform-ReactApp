@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
-// import QuizResult from "./QuizResult";
 import QuestionOptions from "./QuestionOptions";
 import { useAuth0 } from "@auth0/auth0-react";
 import { useNavigate } from "react-router-dom";
 import { Question } from "../../types";
+import { BeatLoader } from "react-spinners";
 
 const Quiz: React.FC = () => {
   const [questions, setQuestions] = useState<Question[]>([]);
@@ -20,6 +20,7 @@ const Quiz: React.FC = () => {
   const [shownQuestions, setShownQuestions] = useState<Set<number>>(new Set());
   const { isAuthenticated, user } = useAuth0();
   const navigate = useNavigate();
+  const serverUrl = import.meta.env.VITE_APP_BACKEND_URL;
 
   useEffect(() => {
     if (!isAuthenticated) {
@@ -217,14 +218,11 @@ const Quiz: React.FC = () => {
         })),
       };
 
-      const response = await fetch(
-        "http://localhost:5000/api/quiz/save-history",
-        {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(quizData),
-        }
-      );
+      const response = await fetch(`${serverUrl}/api/quiz/save-history`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(quizData),
+      });
 
       const responseData = await response.json();
       console.log("🚀 Full Response Data:", responseData); // Debugging
@@ -244,8 +242,8 @@ const Quiz: React.FC = () => {
 
   if (loading) {
     return (
-      <div className="min-h-0 flex items-center justify-center bg-dark-1">
-        Loading...
+      <div className="flex justify-center items-center h-[calc(100vh-64px)]">
+        <BeatLoader color="#ffffff" size={15} />
       </div>
     );
   }
@@ -253,43 +251,44 @@ const Quiz: React.FC = () => {
   const currentQuestion = questions[currentQuestionIndex];
 
   return (
-    <div className="min-h-0 flex items-center justify-center bg-dark-1">
-      <div className="bg-dark-2 md:p-6 p-10 rounded-lg shadow-lg flex flex-col items-start md:w-465 max-w-2xl sm:w-auto h-auto">
-        <h2 className="text-xl md:text-2xl font-bold mb-4 text-white">
-          {currentQuestion &&
-            `${currentQuestionIndex + 1}. ${currentQuestion.question} `}
+    <div className="flex justify-center items-center min-h-screen bg-dark-1 px-4 pt-28">
+      <div className="bg-dark-2 p-6 md:p-10 rounded-lg shadow-lg flex flex-col items-center w-full max-w-3xl">
+        <h2 className="text-2xl font-bold mb-4 text-center text-white">
+          {currentQuestionIndex + 1}. {currentQuestion?.question}
         </h2>
-        <div className="flex space-x-4 mb-4 ml-6">
-          <p
-            className={
+
+        {/* Difficulty & Tags */}
+        <div className="flex space-x-4 mb-4">
+          <span
+            className={`px-4 py-2 rounded-full ${
               currentQuestion?.difficulty === "easy"
-                ? "text-green-500 bg-dark-4 rounded-full p-2 pl-4 pr-4"
+                ? "bg-green-500 text-white"
                 : currentQuestion?.difficulty === "medium"
-                ? "text-yellow-500 bg-dark-4 rounded-full p-2 pl-4 pr-4"
-                : currentQuestion?.difficulty === "hard"
-                ? "text-red bg-dark-4 rounded-full p-2 pl-4 pr-4"
-                : ""
-            }
+                ? "bg-yellow-500 text-white"
+                : "bg-red text-white"
+            }`}
           >
-            {currentQuestion && `${currentQuestion.difficulty}`}
-          </p>
-          <p className="bg-neutral-600 rounded-full p-2 pl-4 pr-4">
-            {currentQuestion && `${currentQuestion.tags}`}
-          </p>
+            {currentQuestion?.difficulty}
+          </span>
+          <span className="bg-neutral-600 px-4 py-2 rounded-full text-white">
+            {currentQuestion?.tags?.join(", ") || "General"}
+          </span>
         </div>
+
+        {/* Options */}
         <QuestionOptions
           options={currentQuestion?.options ?? []}
           selectedOption={selectedOption}
           setSelectedOption={setSelectedOption}
         />
-        <div className="flex justify-end w-full">
-          <button
-            onClick={handleAnswer}
-            className="bg-primary-500 hover:bg-primary-600 text-white font-bold py-2 px-4 rounded transition"
-          >
-            Next
-          </button>
-        </div>
+
+        {/* Navigation Button */}
+        <button
+          onClick={handleAnswer}
+          className="mt-4 bg-primary-500 hover:bg-primary-600 text-white font-bold py-2 px-6 rounded-lg transition duration-200"
+        >
+          {completed ? "Finish Quiz" : "Next"}
+        </button>
       </div>
     </div>
   );
