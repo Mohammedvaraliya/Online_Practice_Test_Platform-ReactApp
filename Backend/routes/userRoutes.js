@@ -3,7 +3,7 @@ const User = require("../models/User");
 
 const router = express.Router();
 
-// ✅ Route to get all users
+// Route to get all users
 router.get("/", async (req, res) => {
   try {
     const users = await User.find({});
@@ -14,7 +14,7 @@ router.get("/", async (req, res) => {
   }
 });
 
-// ✅ Route to get a specific user by auth0Id
+// Route to get a specific user by auth0Id
 router.get("/:auth0Id", async (req, res) => {
   try {
     const user = await User.findOne({ auth0Id: req.params.auth0Id });
@@ -30,7 +30,7 @@ router.get("/:auth0Id", async (req, res) => {
   }
 });
 
-// ✅ Route to create/update user during authentication
+// Route to create/update user during authentication
 router.post("/auth", async (req, res) => {
   try {
     console.log("Incoming request body:", req.body);

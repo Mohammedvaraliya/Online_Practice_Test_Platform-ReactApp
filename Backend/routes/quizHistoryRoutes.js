@@ -4,7 +4,7 @@ const User = require("../models/User");
 
 const router = express.Router();
 
-// ✅ Fetch all saved quiz histories
+// Fetch all saved quiz histories
 router.get("/histories", async (req, res) => {
   try {
     const histories = await QuizHistory.find().populate(
