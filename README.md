@@ -141,21 +141,6 @@ This ensures users can review their answers and improve accordingly.
 - 🌍 **Frontend:** Deployed on **Netlify** – [Online Practice Test Platform](https://online-practice-test-platform.netlify.app/)
 - 🔥 **Backend:** Deployed on **Render**
 
----
-
-## **Conclusion**
-
-The **Online Practice Test Platform** is a powerful **adaptive testing system** that enhances the learning experience through **dynamic question difficulty adjustments** and **detailed result analysis**.
-
-This project successfully integrates:  
-✅ **MERN Stack** for efficient full-stack development.  
-✅ **Google Auth0 Authentication** for secure login.  
-✅ **MongoDB** for storing user data and quiz history.  
-✅ **REST APIs** to maintain modular and scalable architecture.  
-✅ **Adaptive Testing Algorithm** for personalized quizzes.
-
-🔹 **Live Demo:** [Online Practice Test Platform](https://online-practice-test-platform.netlify.app/)
-
 🚀 **Happy Learning!** 🎯
 
 ---
