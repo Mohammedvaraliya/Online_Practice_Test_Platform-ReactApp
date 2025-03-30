@@ -9,28 +9,51 @@ const QuizHistory: React.FC = () => {
   const { user, isAuthenticated } = useAuth0();
   const [history, setHistory] = useState<QuizHistoryItem[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
-  const [error, setError] = useState<string | null>(null);
   const navigate = useNavigate();
   const serverUrl = import.meta.env.VITE_APP_BACKEND_URL;
 
   useEffect(() => {
-    if (!isAuthenticated || !user?.sub) return;
+    if (!isAuthenticated || !user?.sub) {
+      navigate("/error", { state: { message: "Unauthorized access." } });
+      return;
+    }
 
     const fetchQuizHistory = async () => {
       try {
         const response = await axios.get(
-          `${serverUrl}/api/quiz/user-histories/${user.sub}` // ✅ Fixed API path
+          `${serverUrl}/api/quiz/user-histories/${user.sub}`
         );
-        setHistory(response.data);
+
+        if (!Array.isArray(response.data)) {
+          throw new Error("Unexpected response format.");
+        }
+
+        if (response.data.length === 0) {
+          navigate("/error", {
+            state: { message: "No quiz history found." },
+          });
+          return;
+        }
+
+        // 🔥 Sort quizzes by date (newest first)
+        const sortedHistory = response.data.sort(
+          (a: QuizHistoryItem, b: QuizHistoryItem) =>
+            new Date(b.date).getTime() - new Date(a.date).getTime()
+        );
+
+        setHistory(sortedHistory);
       } catch (err) {
-        setError("Failed to fetch quiz history. Please try again.");
+        console.error("❌ Error fetching quiz history:", err);
+        navigate("/error", {
+          state: { message: "Failed to load quiz history. Please try again." },
+        });
       } finally {
         setLoading(false);
       }
     };
 
     fetchQuizHistory();
-  }, [isAuthenticated, user?.sub]);
+  }, [isAuthenticated, user?.sub, navigate]);
 
   if (loading) {
     return (
@@ -40,50 +63,42 @@ const QuizHistory: React.FC = () => {
     );
   }
 
-  if (error) {
-    return <p className="text-center text-red-500">{error}</p>;
-  }
-
   return (
     <div className="min-h-screen bg-dark-1 flex flex-col items-center p-8 pt-28">
       <h2 className="text-4xl font-extrabold text-white mb-6">
         📜 Quiz History
       </h2>
 
-      {history.length === 0 ? (
-        <p className="text-white text-lg">No quiz history found.</p>
-      ) : (
-        <div className="w-full max-w-3xl space-y-4">
-          {history.map((quiz, index) => (
-            <div
-              key={quiz._id}
-              className="bg-dark-2 p-5 rounded-lg shadow-md cursor-pointer transition-all transform hover:scale-105 hover:bg-gray-800 border border-gray-600"
-              onClick={() => navigate(`/quiz-history/${quiz._id}`)}
-            >
-              <div className="flex justify-between items-center">
-                <h3 className="text-2xl font-bold text-white">
-                  Quiz {history.length - index}
-                </h3>
-                <span
-                  className={`text-lg font-semibold px-3 py-1 rounded-md ${
-                    quiz.score > 70
-                      ? "bg-green-500 text-white"
-                      : "bg-red text-white"
-                  }`}
-                >
-                  {quiz.score}%
-                </span>
-              </div>
-              <p className="text-gray-300 mt-2">
-                ✅ Correct: {quiz.correctAnswers}/{quiz.totalQuestions}
-              </p>
-              <p className="text-gray-400 text-sm mt-1">
-                📅 {new Date(quiz.date).toLocaleString()}
-              </p>
+      <div className="w-full max-w-3xl space-y-4">
+        {history.map((quiz, index) => (
+          <div
+            key={quiz._id}
+            className="bg-dark-2 p-5 rounded-lg shadow-md cursor-pointer transition-all transform hover:scale-105 hover:bg-gray-800 border border-gray-600"
+            onClick={() => navigate(`/quiz-history/${quiz._id}`)}
+          >
+            <div className="flex justify-between items-center">
+              <h3 className="text-2xl font-bold text-white">
+                Quiz {history.length - index}
+              </h3>
+              <span
+                className={`text-lg font-semibold px-3 py-1 rounded-md ${
+                  quiz.score > 70
+                    ? "bg-green-500 text-white"
+                    : "bg-red text-white"
+                }`}
+              >
+                {quiz.score}%
+              </span>
             </div>
-          ))}
-        </div>
-      )}
+            <p className="text-gray-300 mt-2">
+              ✅ Correct: {quiz.correctAnswers}/{quiz.totalQuestions}
+            </p>
+            <p className="text-gray-400 text-sm mt-1">
+              📅 {new Date(quiz.date).toLocaleString()}
+            </p>
+          </div>
+        ))}
+      </div>
     </div>
   );
 };

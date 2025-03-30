@@ -1,3 +1,13 @@
+export interface UserData {
+  _id: string;
+  auth0Id: string;
+  name: string;
+  email: string;
+  picture: string;
+  createdAt: string;
+  updatedAt: string;
+}
+
 export type Question = {
   question: string;
   options: string[];

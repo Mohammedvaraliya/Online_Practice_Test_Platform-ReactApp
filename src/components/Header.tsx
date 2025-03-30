@@ -1,12 +1,38 @@
 import { useAuth0 } from "@auth0/auth0-react";
 import { useState, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
+import axios from "axios";
 
 const Header: React.FC = () => {
   const { user, logout, isAuthenticated } = useAuth0();
   const [dropdownOpen, setDropdownOpen] = useState<boolean>(false);
+  const [userExists, setUserExists] = useState<boolean>(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
+  const serverUrl = import.meta.env.VITE_APP_BACKEND_URL;
 
+  // Check if the user exists in the database
+  useEffect(() => {
+    const checkUserInDB = async () => {
+      if (!isAuthenticated || !user) return;
+
+      try {
+        const response = await axios.get(`${serverUrl}/api/users/${user.sub}`);
+        if (response.status === 200 && response.data) {
+          setUserExists(true);
+        }
+      } catch (error: any) {
+        if (error.response?.status === 404) {
+          setUserExists(false);
+        } else {
+          console.error("❌ Error checking user in DB:", error);
+        }
+      }
+    };
+
+    checkUserInDB();
+  }, [isAuthenticated, user]);
+
+  // Close dropdown when clicking outside
   const handleClickOutside = (event: MouseEvent) => {
     if (
       dropdownRef.current &&
@@ -43,16 +69,17 @@ const Header: React.FC = () => {
 
       {/* User Profile Dropdown */}
       <div className="relative" ref={dropdownRef}>
-        {isAuthenticated ? (
+        {isAuthenticated && userExists ? (
           <>
             <button
               onClick={() => setDropdownOpen(!dropdownOpen)}
               className="flex items-center space-x-2 bg-gray-800 hover:bg-gray-700 text-white font-semibold py-2 px-4 rounded-full transition duration-200"
             >
               <img
-                src={user?.picture}
+                src={`${user?.picture}?timestamp=${new Date().getTime()}`}
                 alt="User Avatar"
                 className="w-8 h-8 rounded-full border border-gray-500"
+                crossOrigin="anonymous"
               />
               <span>{user?.nickname}</span>
             </button>

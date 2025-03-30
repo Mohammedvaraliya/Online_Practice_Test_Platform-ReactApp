@@ -17,15 +17,16 @@ router.get("/", async (req, res) => {
 // Route to get a specific user by auth0Id
 router.get("/:auth0Id", async (req, res) => {
   try {
-    const user = await User.findOne({ auth0Id: req.params.auth0Id });
+    const auth0Id = decodeURIComponent(req.params.auth0Id);
+    const user = await User.findOne({ auth0Id });
 
     if (!user) {
-      return res.status(404).json({ message: "User not found" });
+      return res.status(404).json({ error: "User not found" });
     }
 
     res.status(200).json(user);
   } catch (err) {
-    console.error("Error fetching user:", err);
+    console.error("❌ Error in fetching user:", err);
     res.status(500).json({ error: err.message });
   }
 });
@@ -35,16 +36,30 @@ router.post("/auth", async (req, res) => {
   try {
     console.log("Incoming request body:", req.body);
 
-    const { auth0Id, name, email, picture } = req.body;
-    if (!auth0Id || !name || !email || !picture) {
+    const { auth0Id, name, email, picture, given_name } = req.body;
+
+    if (!auth0Id || !email || !picture) {
       console.error("Validation Error: Missing user data");
       return res.status(400).json({ error: "Missing user data" });
     }
 
+    // Determine the correct name field (for Google vs. Email/Password logins)
+    const userName = given_name || name || email.split("@")[0];
+
     let user = await User.findOne({ auth0Id });
 
     if (!user) {
-      user = new User({ auth0Id, name, email, picture });
+      // Check if an account with the same email exists
+      let existingUser = await User.findOne({ email });
+      if (existingUser) {
+        console.error("User with this email already exists:", email);
+        return res
+          .status(409)
+          .json({ error: "User with this email already exists" });
+      }
+
+      // Create a new user
+      user = new User({ auth0Id, name: userName, email, picture });
       await user.save();
       console.log("✅ New user saved:", user);
     } else {

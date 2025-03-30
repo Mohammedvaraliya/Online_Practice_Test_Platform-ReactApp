@@ -13,6 +13,7 @@ const Quiz: React.FC = () => {
   const [correctAnswerCount, setCorrectAnswerCount] = useState<number>(0);
   const [completed, setCompleted] = useState<boolean>(false);
   const [loading, setLoading] = useState<boolean>(true);
+  const [savingHistory, setSavingHistory] = useState<boolean>(false); // New state for saving quiz history
   const [difficulty, setDifficulty] = useState<string>("easy");
   const [easyQuestions, setEasyQuestions] = useState<Question[]>([]);
   const [mediumQuestions, setMediumQuestions] = useState<Question[]>([]);
@@ -28,7 +29,6 @@ const Quiz: React.FC = () => {
     }
   }, [isAuthenticated, navigate]);
 
-  // Function to preload all questions from each difficulty level
   const preloadQuestions = async () => {
     setLoading(true);
     try {
@@ -137,27 +137,21 @@ const Quiz: React.FC = () => {
     }
   };
 
-  const handleAnswer = (): void => {
+  const handleAnswer = async (): Promise<void> => {
     if (selectedOption === null) return;
 
     const currentQuestion = questions[currentQuestionIndex];
     const isCorrect = selectedOption === currentQuestion.correct_answer;
 
-    if (isCorrect && currentQuestion.difficulty === "easy") {
-      setScore((prevScore) => prevScore + 2);
-      setCorrectAnswerCount(
-        (prevCorrectAnswerCount) => prevCorrectAnswerCount + 1
-      );
-    } else if (isCorrect && currentQuestion.difficulty === "medium") {
-      setScore((prevScore) => prevScore + 3);
-      setCorrectAnswerCount(
-        (prevCorrectAnswerCount) => prevCorrectAnswerCount + 1
-      );
-    } else if (isCorrect && currentQuestion.difficulty === "hard") {
-      setScore((prevScore) => prevScore + 4);
-      setCorrectAnswerCount(
-        (prevCorrectAnswerCount) => prevCorrectAnswerCount + 1
-      );
+    if (isCorrect) {
+      const scoreIncrease =
+        currentQuestion.difficulty === "easy"
+          ? 2
+          : currentQuestion.difficulty === "medium"
+          ? 3
+          : 4;
+      setScore((prevScore) => prevScore + scoreIncrease);
+      setCorrectAnswerCount((prevCount) => prevCount + 1);
     }
 
     const newDifficulty = getNextDifficulty(isCorrect, difficulty);
@@ -175,11 +169,7 @@ const Quiz: React.FC = () => {
       return updatedQuestions;
     });
 
-    console.log(questions);
-
     setSelectedOption(null);
-    // console.log("Questions length:", questions.length);
-    // console.log("Current Question Index:", currentQuestionIndex);
 
     if (questions.length < 10) {
       setCompleted(false);
@@ -187,19 +177,19 @@ const Quiz: React.FC = () => {
       if (nextQuestion) {
         setQuestions((prevQuestions) => [...prevQuestions, nextQuestion]);
         setCurrentQuestionIndex((prevIndex) => prevIndex + 1);
-        console.log("Next Question:", nextQuestion);
       }
     }
 
     if (questions.length === 10) {
       setCompleted(true);
-      saveQuizHistory();
-      console.log(questions);
+      await saveQuizHistory();
     }
   };
 
   const saveQuizHistory = async () => {
     if (!user?.sub) return;
+
+    setSavingHistory(true);
 
     try {
       const quizData = {
@@ -224,23 +214,35 @@ const Quiz: React.FC = () => {
         body: JSON.stringify(quizData),
       });
 
-      const responseData = await response.json();
-      console.log("🚀 Full Response Data:", responseData); // Debugging
-
-      if (!responseData.quizHistory.userId) {
-        throw new Error("Missing _id in response");
+      if (!response.ok) {
+        throw new Error(`Server responded with status: ${response.status}`);
       }
 
-      console.log("✅ Quiz history saved with ID:", responseData._id);
-      setTimeout(() => {
-        navigate(`/quiz-history/${responseData.quizHistory._id}`);
-      }, 500);
+      const responseData = await response.json();
+      if (!responseData.quizHistory || !responseData.quizHistory._id) {
+        throw new Error(
+          "Invalid response from server: Missing quiz history ID"
+        );
+      }
+
+      console.log(
+        "✅ Quiz history saved with ID:",
+        responseData.quizHistory._id
+      );
+      navigate(`/quiz-history/${responseData.quizHistory._id}`);
     } catch (error) {
       console.error("❌ Error saving quiz history:", error);
+      navigate("/error", {
+        state: {
+          message: "Failed to save your quiz history. Please try again later.",
+        },
+      });
+    } finally {
+      setSavingHistory(false);
     }
   };
 
-  if (loading) {
+  if (loading || savingHistory) {
     return (
       <div className="flex justify-center items-center h-[calc(100vh-64px)]">
         <BeatLoader color="#ffffff" size={15} />

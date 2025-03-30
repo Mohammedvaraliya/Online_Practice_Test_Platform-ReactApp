@@ -6,6 +6,7 @@ import Profile from "./components/Profile";
 import QuizHistory from "./components/Quiz/QuizHistory";
 import QuizResult from "./components/Quiz/QuizResult";
 import Header from "./components/Header";
+import Quiz from "./components/Quiz/Quiz";
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
           <Route index path="/" element={<Login />} />
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/profile" element={<Profile />} />
+          <Route path="/quiz" element={<Quiz />} />
           <Route path="/quiz-history" element={<QuizHistory />} />
           <Route path="/quiz-history/:id" element={<QuizResult />} />
         </Routes>

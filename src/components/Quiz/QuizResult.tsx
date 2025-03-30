@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
 import ResultEvaluationWithPiChart from "./ResultEvaluationWithPiChart";
 import { QuizHistoryDetail } from "../../types";
@@ -7,29 +7,41 @@ import { BeatLoader } from "react-spinners";
 
 const QuizResult: React.FC = () => {
   const { id } = useParams();
+  const navigate = useNavigate();
   const [quizData, setQuizData] = useState<QuizHistoryDetail | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
-  const [error, setError] = useState<string | null>(null);
   const serverUrl = import.meta.env.VITE_APP_BACKEND_URL;
 
   useEffect(() => {
-    if (!id) return;
+    if (!id) {
+      navigate("/error", { state: { message: "Invalid quiz ID." } });
+      return;
+    }
 
     const fetchQuizDetail = async () => {
       try {
         const response = await axios.get(
           `${serverUrl}/api/quiz/user-history/${id}`
         );
+
+        if (!response.data) {
+          navigate("/error", { state: { message: "Quiz data not found." } });
+          return;
+        }
+
         setQuizData(response.data);
       } catch (err) {
-        setError("Failed to load quiz details.");
+        console.error("❌ Error fetching quiz details:", err);
+        navigate("/error", {
+          state: { message: "Failed to load quiz details. Please try again." },
+        });
       } finally {
         setLoading(false);
       }
     };
 
     fetchQuizDetail();
-  }, [id]);
+  }, [id, navigate]);
 
   // Function to process quiz data for Pie Chart
   const processQuizData = () => {
@@ -40,7 +52,7 @@ const QuizResult: React.FC = () => {
     const tagCounts: { [key: string]: { correct: number; total: number } } = {};
 
     quizData.questions.forEach((question) => {
-      if (!question.tags || question.tags.length === 0) return; // Ensure tags exist
+      if (!question.tags || question.tags.length === 0) return;
 
       question.tags.forEach((tag) => {
         if (!tagCounts[tag]) {
@@ -56,10 +68,10 @@ const QuizResult: React.FC = () => {
 
     console.log("Processed Tag Data:", tagCounts);
 
-    return Object.keys(tagCounts).map((tag, index) => ({
+    return Object.entries(tagCounts).map(([tag, data], index) => ({
       id: index,
-      value: tagCounts[tag].correct,
-      label: `${tag} ${tagCounts[tag].correct}/${tagCounts[tag].total}`,
+      value: data.correct,
+      label: `${tag} ${data.correct}/${data.total}`,
     }));
   };
 
@@ -70,8 +82,11 @@ const QuizResult: React.FC = () => {
       </div>
     );
   }
-  if (error) return <p className="text-red-500">{error}</p>;
-  if (!quizData) return <p className="text-white">Quiz data not found.</p>;
+
+  if (!quizData) {
+    navigate("/error", { state: { message: "Quiz data not found." } });
+    return null;
+  }
 
   return (
     <div className="flex justify-center items-center min-h-screen bg-dark-1 px-4 pt-28">
@@ -107,7 +122,7 @@ const QuizResult: React.FC = () => {
               <div
                 key={index}
                 className={`p-5 rounded-lg shadow-md border-4 ${
-                  isCorrect ? "border-green-500" : "border-red-500"
+                  isCorrect ? "border-green-500" : "border-red"
                 } bg-dark-3`}
               >
                 <h3 className="text-lg font-semibold text-white mb-2">
