@@ -1,67 +1,77 @@
-# Online Practice Test Platform
+# **Online Practice Test Platform**
+
+🚀 **Live Application:** [Online Practice Test Platform](https://online-practice-test-platform.netlify.app/)
 
 ---
 
-## Problem Statement
+## **Overview**
 
-**Task 1: Online Practice Test Platform**
+The **Online Practice Test Platform** is a web-based application designed to provide an adaptive and personalized quiz experience using **Computerized Adaptive Testing (CAT)**. The platform dynamically adjusts question difficulty based on user performance, ensuring an optimal learning experience.
 
-### Objective
+This project is built using the **MERN stack (MongoDB, Express.js, React, Node.js)** and implements **Google Auth0 for authentication**. All quiz-related operations are handled via a well-structured **REST API** with a dedicated backend.
 
-Implement a login system (including Google OAuth) and a signup system that directs users to a personalized dashboard. This dashboard will start an online quiz with a personalized experience based on Computerized Adaptive Testing (CAT). The demonstration uses 20 MCQ questions in mathematics for students in classes 7th to 10th.
+---
 
-### Requirements
+## **Features**
 
-1. **User Authentication:**
-   1. Implement a login system with email and password.
-   2. Include Google OAuth for login.
-   3. Provide a signup option.
-2. **Dashboard:**
-   1. Upon successful login, direct users to a personalized dashboard.
-   2. The dashboard should allow users to start an online quiz.
-3. **Quiz System:**
-   1. The quiz should have 20 MCQ questions with varying initial weightages based on difficulty.
-   2. Each question should have different tags (e.g., algebra, geometry) to classify the type of question.
-   3. Implement Computerized Adaptive Testing (CAT) to adapt the difficulty of the quiz based on the user's performance.
-4. **Result Evaluation and Reporting:**
-   1. Upon submission of the quiz, generate a report evaluating the user's performance.
-   2. Provide suggestions for further improvements.
-5. **Technologies:**
-   1. Use MERN stack (mandatory).
-6. **Documentation:**
-   1. Provide detailed documentation of your code and implementation process.
-7. **Submission:**
-   1. Host your project on GitHub and provide the repository link.
+### **1. User Authentication**
 
-## Implementation
+✅ Secure authentication using **Google Auth0**.  
+✅ Upon successful login, user details are stored in **MongoDB** for future interactions.
 
-### User Authentication
+### **2. Personalized Dashboard**
 
-I implemented a robust authentication system that includes:
+✅ Upon authentication, users are redirected to a **dashboard** where they can:
 
-1. **Email and Password Login:** Users can sign up and log in using their email and password.
-2. **Google OAuth:** Users can also log in using their Google accounts for a seamless and secure authentication experience.
+- Start a quiz.
+- View quiz history.
 
-Auth0 provides a comprehensive solution that simplifies the integration of both email/password and Google login functionalities, ensuring secure and efficient user authentication.
+### **3. Quiz System with Adaptive Difficulty**
 
-### Dashboard
+✅ The quiz consists of **10 multiple-choice questions (MCQs)**.  
+✅ Uses **Computerized Adaptive Testing (CAT)** to adjust question difficulty dynamically based on the user's performance.  
+✅ Questions are categorized into **easy, medium, and hard**, with different scoring weights:
 
-Upon successful authentication, users are redirected to a personalized dashboard that includes:
+- **Easy:** 2 points
+- **Medium:** 3 points
+- **Hard:** 4 points
 
-1. **Navbar:** Navigation options for the user to access different features of the application.
-2. **Start Quiz Button:** Users can start the online quiz directly from the dashboard.
+### **4. Database & API Structure**
 
-### Quiz System
+✅ **MongoDB** is used to store user authentication details and **quiz history**.  
+✅ The backend features **separate API endpoints for each operation**, including:
 
-The quiz system is designed with three difficulty levels: easy, medium, and hard. Each question has a specific point value based on its difficulty:
+- Fetching quiz questions.
+- Storing quiz history.
+- Retrieving past quiz results.
 
-1. **Easy:** 2 points
-2. **Medium:** 3 points
-3. **Hard:** 4 points
+### **5. Result Evaluation & Reporting**
 
-### Question Structure
+✅ At the end of the quiz, a **detailed report** is generated, displaying:
 
-The questions are stored in JSON files, categorized by difficulty. Below is a sample structure of a question in the JSON file:
+- Total **score**.
+- Number of **correct answers**.
+- A **pie chart visualization** of performance based on question categories.  
+  ✅ The report includes **explanations and references** for incorrectly answered questions, helping users improve.
+
+---
+
+## **Technology Stack**
+
+| Component             | Technology Used                |
+| --------------------- | ------------------------------ |
+| Frontend              | **React (Vite), Tailwind CSS** |
+| Backend               | **Node.js, Express.js**        |
+| Database              | **MongoDB (Atlas)**            |
+| Authentication        | **Google Auth0**               |
+| Deployment (Frontend) | **Netlify**                    |
+| Deployment (Backend)  | **Render**                     |
+
+---
+
+## **Data Structure & Sample Question Format**
+
+All quiz questions are stored in **JSON format** and categorized by difficulty level.
 
 ```json
 [
@@ -73,74 +83,79 @@ The questions are stored in JSON files, categorized by difficulty. Below is a sa
     "difficulty": "easy",
     "tags": ["arithmetic"],
     "explanation": "Multiplying any number by -1 changes its sign. Here, -67 multiplied by -1 results in 67.",
-    "references": ["<https://www.mathsisfun.com/numbers/multiplication.html>"]
+    "references": ["https://www.mathsisfun.com/numbers/multiplication.html"]
   }
 ]
 ```
 
-### Computerized Adaptive Testing (CAT)
+---
 
-The CAT system adapts the difficulty of the quiz based on the user's performance:
+## **Computerized Adaptive Testing (CAT) Logic**
 
-1. If the user answers an easy question correctly, the next question will be of medium difficulty. If they answer a medium question correctly, the next will be hard. If they answer a hard question correctly, the next will be another hard question.
-2. Conversely, if the user answers a medium question incorrectly, the next question will be easy. If they answer a hard question incorrectly, the next will be medium.
+📌 The quiz adapts based on the user's performance:
 
-This ensures that the quiz adjusts to the user's level, providing a balanced challenge.
+- ✅ **Correct Answer** → Next question is of **higher difficulty**.
+- ❌ **Wrong Answer** → Next question is of **lower difficulty**.
+- **Progression Path:**
+  - Easy → Medium → Hard
+  - Medium → Hard / Easy
+  - Hard → Hard / Medium
 
-### Result Evaluation and Reporting
+This ensures that each user receives a **personalized and challenging quiz experience**.
 
-Upon completing the quiz, a comprehensive report is generated that includes:
+---
 
-1. **Score:** The total points scored by the user.
-2. **Correct Answers:** The number of correct answers out of the total questions answered.
-3. **Pie Chart Visualization:** A pie chart showing the distribution of correct answers across different tags (e.g., algebra, geometry).
+## **Backend API Overview**
 
-Additionally, the report provides a detailed review of all 20 questions submitted by the user:
+The backend is built using **Node.js & Express.js**, with **MongoDB** as the database. It includes **separate API endpoints for each operation** to ensure modularity and maintainability.
 
-1. **User's Answer and Correct Answer:** For each question, the user's answer and the correct answer are displayed.
-2. **Explanations and References:** If the user's answer is incorrect, an explanation is provided along with additional reference URLs to help the user understand the concept of the particular question.
-3. **Visual Highlighting:** Correctly answered questions are highlighted with a green border, making it easy for users to identify their correct responses at a glance.
+### **Key API Endpoints:**
 
-This detailed report helps users understand their performance, identify areas for improvement, and offers resources to enhance their understanding of specific topics.
+| Method   | Endpoint                    | Description                         |
+| -------- | --------------------------- | ----------------------------------- |
+| **POST** | `/api/auth/login`           | Authenticate users via Google Auth0 |
+| **POST** | `/api/quiz/start`           | Fetch quiz questions dynamically    |
+| **POST** | `/api/quiz/save-history`    | Save user quiz history in MongoDB   |
+| **GET**  | `/api/quiz/history/:userId` | Retrieve past quiz results          |
 
-## Getting Started
+All API requests and responses are **JSON-based** and follow RESTful standards.
 
-### Prerequisites
+---
 
-Ensure you have the following installed:
+## **Result Evaluation & Reporting**
 
-1. Node.js
+Upon quiz completion, a **detailed performance report** is generated, including:
 
-### Installation
+📊 **Score Summary**  
+✅ **Correct Answers Count**  
+📌 **Explanations for incorrect answers**  
+🔗 **Reference links for further learning**  
+📈 **Pie Chart visualization**
 
-1. **Clone the repository:**
+This ensures users can review their answers and improve accordingly.
 
-   ```bash
-   git clone https://github.com/MohammedVaraliya-2/Online_Practice_Test_Platform.git
+---
 
-   ```
+## **Deployment Details**
 
-   ```jsx
-   cd Online_Practice_Test_Platform
-   ```
+- 🌍 **Frontend:** Deployed on **Netlify** – [Online Practice Test Platform](https://online-practice-test-platform.netlify.app/)
+- 🔥 **Backend:** Deployed on **Render**
 
-2. **Install dependencies:**
+---
 
-   ```bash
-   npm install
-   ```
+## **Conclusion**
 
-3. **Run the application:**
+The **Online Practice Test Platform** is a powerful **adaptive testing system** that enhances the learning experience through **dynamic question difficulty adjustments** and **detailed result analysis**.
 
-   ```bash
-   npm run dev
-   ```
+This project successfully integrates:  
+✅ **MERN Stack** for efficient full-stack development.  
+✅ **Google Auth0 Authentication** for secure login.  
+✅ **MongoDB** for storing user data and quiz history.  
+✅ **REST APIs** to maintain modular and scalable architecture.  
+✅ **Adaptive Testing Algorithm** for personalized quizzes.
 
-### Usage
+🔹 **Live Demo:** [Online Practice Test Platform](https://online-practice-test-platform.netlify.app/)
 
-1. Open your browser and navigate to the url provided by the server [`http://localhost:5173/`](http://localhost:5173/).
-2. Sign up or log in using your email and password or Google account.
-3. Start the quiz from the dashboard and answer the questions.
-4. View the result report and analyze your performance.
+🚀 **Happy Learning!** 🎯
 
-The Online Practice Test Platform provides a comprehensive solution for personalized quiz experiences using CAT. The implementation includes robust authentication, adaptive testing, and detailed performance reporting. The project is well-documented and meets the specified requirements, providing a valuable tool for students to enhance their learning experience.
+---
