@@ -6,72 +6,69 @@
 
 ## **Overview**
 
-The **Online Practice Test Platform** is a web-based application designed to provide an adaptive and personalized quiz experience using **Computerized Adaptive Testing (CAT)**. The platform dynamically adjusts question difficulty based on user performance, ensuring an optimal learning experience.
+The **Online Practice Test Platform** is a responsive and intelligent web application offering a personalized quiz experience through **Computerized Adaptive Testing (CAT)**. Built with the **MERN stack (MongoDB, Express.js, React, Node.js)**, the platform dynamically adapts question difficulty in real-time based on user performance, ensuring a tailored and effective learning process.
 
-This project is built using the **MERN stack (MongoDB, Express.js, React, Node.js)** and implements **Google Auth0 for authentication**. All quiz-related operations are handled via a well-structured **REST API** with a dedicated backend.
+The application also features **Google Auth0** authentication, a user-specific dashboard, detailed performance reports, and seamless data handling via a robust REST API.
 
 ---
 
 ## **Features**
 
-### **1. User Authentication**
+### 🔐 **User Authentication**
 
-✅ Secure authentication using **Google Auth0**.  
-✅ Upon successful login, user details are stored in **MongoDB** for future interactions.
+- Secure sign-in using **Google Auth0**.
+- On successful login, user information is persisted in **MongoDB** for personalized access.
 
-### **2. Personalized Dashboard**
+### 🧑‍💻 **User Dashboard**
 
-✅ Upon authentication, users are redirected to a **dashboard** where they can:
+- Post-authentication, users are directed to a personal **dashboard** where they can:
 
-- Start a quiz.
-- View quiz history.
+  - Initiate new quizzes.
+  - Access historical quiz performance.
 
-### **3. Quiz System with Adaptive Difficulty**
+### 🧠 **Computerized Adaptive Testing (CAT)**
 
-✅ The quiz consists of **10 multiple-choice questions (MCQs)**.  
-✅ Uses **Computerized Adaptive Testing (CAT)** to adjust question difficulty dynamically based on the user's performance.  
-✅ Questions are categorized into **easy, medium, and hard**, with different scoring weights:
+- Each quiz consists of **10 multiple-choice questions**.
+- Question difficulty (easy, medium, hard) is dynamically adjusted based on the user's response history.
+- **Scoring System:**
 
-- **Easy:** 2 points
-- **Medium:** 3 points
-- **Hard:** 4 points
+  - Easy: 2 points
+  - Medium: 3 points
+  - Hard: 4 points
 
-### **4. Database & API Structure**
+### 📊 **Results & Analytics**
 
-✅ **MongoDB** is used to store user authentication details and **quiz history**.  
-✅ The backend features **separate API endpoints for each operation**, including:
+- Users receive a **comprehensive result report** post-quiz, including:
 
-- Fetching quiz questions.
-- Storing quiz history.
-- Retrieving past quiz results.
+  - Total score and number of correct answers
+  - **Pie chart visualizations** for category-wise performance
+  - Detailed **explanations and references** for incorrect answers
 
-### **5. Result Evaluation & Reporting**
+### 🧩 **Database & API Architecture**
 
-✅ At the end of the quiz, a **detailed report** is generated, displaying:
+- **MongoDB Atlas** is used for storing user data and quiz histories.
+- RESTful API endpoints handle:
 
-- Total **score**.
-- Number of **correct answers**.
-- A **pie chart visualization** of performance based on question categories.  
-  ✅ The report includes **explanations and references** for incorrectly answered questions, helping users improve.
+  - Quiz generation
+  - Quiz history storage
+  - Retrieval of past results
 
 ---
 
 ## **Technology Stack**
 
-| Component             | Technology Used                |
-| --------------------- | ------------------------------ |
-| Frontend              | **React (Vite), Tailwind CSS** |
-| Backend               | **Node.js, Express.js**        |
-| Database              | **MongoDB (Atlas)**            |
-| Authentication        | **Google Auth0**               |
-| Deployment (Frontend) | **Netlify**                    |
-| Deployment (Backend)  | **Render**                     |
+| Component           | Technology Used            |
+| ------------------- | -------------------------- |
+| Frontend            | React (Vite), Tailwind CSS |
+| Backend             | Node.js, Express.js        |
+| Database            | MongoDB (Atlas)            |
+| Authentication      | Google Auth0               |
+| Frontend Deployment | Netlify                    |
+| Backend Deployment  | Render                     |
 
 ---
 
-## **Data Structure & Sample Question Format**
-
-All quiz questions are stored in **JSON format** and categorized by difficulty level.
+## **Data Structure: Sample Question Format**
 
 ```json
 [
@@ -90,57 +87,63 @@ All quiz questions are stored in **JSON format** and categorized by difficulty l
 
 ---
 
-## **Computerized Adaptive Testing (CAT) Logic**
+## **Adaptive Testing Logic (CAT)**
 
-📌 The quiz adapts based on the user's performance:
+The system dynamically selects questions based on performance using the following logic:
 
-- ✅ **Correct Answer** → Next question is of **higher difficulty**.
-- ❌ **Wrong Answer** → Next question is of **lower difficulty**.
-- **Progression Path:**
-  - Easy → Medium → Hard
-  - Medium → Hard / Easy
-  - Hard → Hard / Medium
+- ✅ **Correct Answer** → Increase difficulty
+- ❌ **Incorrect Answer** → Decrease difficulty
 
-This ensures that each user receives a **personalized and challenging quiz experience**.
+### 📈 Difficulty Flow:
+
+| Current | If Correct | If Incorrect |
+| ------- | ---------- | ------------ |
+| Easy    | Medium     | Easy         |
+| Medium  | Hard       | Easy         |
+| Hard    | Hard       | Medium       |
 
 ---
 
 ## **Backend API Overview**
 
-The backend is built using **Node.js & Express.js**, with **MongoDB** as the database. It includes **separate API endpoints for each operation** to ensure modularity and maintainability.
+The backend architecture provides clear and modular RESTful endpoints:
 
-### **Key API Endpoints:**
-
-| Method   | Endpoint                    | Description                         |
-| -------- | --------------------------- | ----------------------------------- |
-| **POST** | `/api/auth/login`           | Authenticate users via Google Auth0 |
-| **POST** | `/api/quiz/start`           | Fetch quiz questions dynamically    |
-| **POST** | `/api/quiz/save-history`    | Save user quiz history in MongoDB   |
-| **GET**  | `/api/quiz/history/:userId` | Retrieve past quiz results          |
-
-All API requests and responses are **JSON-based** and follow RESTful standards.
+| Method | Endpoint                    | Description                         |
+| ------ | --------------------------- | ----------------------------------- |
+| POST   | `/api/auth/login`           | Authenticates user via Google Auth0 |
+| POST   | `/api/quiz/start`           | Dynamically fetches quiz questions  |
+| POST   | `/api/quiz/save-history`    | Saves user quiz history             |
+| GET    | `/api/quiz/history/:userId` | Retrieves past quiz performance     |
 
 ---
 
-## **Result Evaluation & Reporting**
+## **Deployment**
 
-Upon quiz completion, a **detailed performance report** is generated, including:
-
-📊 **Score Summary**  
-✅ **Correct Answers Count**  
-📌 **Explanations for incorrect answers**  
-🔗 **Reference links for further learning**  
-📈 **Pie Chart visualization**
-
-This ensures users can review their answers and improve accordingly.
+- 🌐 **Frontend**: [Deployed on Netlify](https://online-practice-test-platform.netlify.app/)
+- ⚙️ **Backend**: Deployed on **Render**
 
 ---
 
-## **Deployment Details**
+## 📷 **Application Snapshots**
 
-- 🌍 **Frontend:** Deployed on **Netlify** – [Online Practice Test Platform](https://online-practice-test-platform.netlify.app/)
-- 🔥 **Backend:** Deployed on **Render**
+The following table showcases various stages and features of the platform:
 
-🚀 **Happy Learning!** 🎯
+| Screen Title                | Image Preview                                                                 | Alt Description                              |
+| --------------------------- | ----------------------------------------------------------------------------- | -------------------------------------------- |
+| Login via Google            | ![Login Page](./public/assets/images/screenshots/login.png)                   | Google Auth0 login screen                    |
+| Welcome Screen              | ![Welcome Screen](./public/assets/images/screenshots/welcome_screen.png)      | Initial landing page after login             |
+| User Profile Dashboard      | ![User Profile](./public/assets/images/screenshots/profile.png)               | User dashboard displaying profile info       |
+| Quiz Start – Easy Level     | ![Quiz Question 1](./public/assets/images/screenshots/quiz_question1.png)     | First quiz question with easy difficulty     |
+| Quiz Progress – Hard Level  | ![Quiz Question 6](./public/assets/images/screenshots/quiz_question6.png)     | Advanced question based on prior performance |
+| Result Analysis - Summary   | ![Result Analysis 1](./public/assets/images/screenshots/result_analysis1.png) | Summary of quiz results and total score      |
+| Result Analysis - Pie Chart | ![Result Analysis 2](./public/assets/images/screenshots/result_analysis2.png) | Category-wise performance chart              |
+| Result Analysis - Review    | ![Result Analysis 3](./public/assets/images/screenshots/result_analysis3.png) | Review of answers with explanations          |
+| Quiz History Overview       | ![Quiz History](./public/assets/images/screenshots/quiz_history.png)          | Historical records of past quizzes           |
+
+---
+
+🚀 **Try it Now:** [Launch the App](https://online-practice-test-platform.netlify.app/)
+
+📧 For feedback, suggestions, or contributions, feel free to open an issue or submit a pull request.
 
 ---
